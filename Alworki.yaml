@@ -1,0 +1,1824 @@
+openapi: 3.0.3
+info:
+  title: Alworki- OpenAPI 3.0
+  description: |-
+    This contract defines the information necessary for data processing at Alworki.
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+servers:
+  - url: https://alworki.com/api/v3
+tags:
+  - name: Inicio de sesión en Alworki
+    description: Inicio de sesión y registro en Alworki
+    externalDocs:
+      description: Faltan afinar detalles
+      url: http://swagger.io
+  - name: Pantallas principales
+    description: Pantallas principales en Alworki
+    externalDocs:
+      description: Faltan afinar detalles
+      url: http://swagger.io      
+  - name: Usuarios
+    description: Información de usuario
+    externalDocs:
+      description: Faltan afinar detalles
+      url: http://swagger.io          
+    
+paths:
+  /registro:
+    post:
+      tags:
+        - Inicio de sesión en Alworki
+      summary: Registro de usuario 
+      description: Agregar un nuevo usuario
+      operationId: agregarUsuario
+      requestBody:
+        description: Crea un nuevo usuario en el registro de Alworki ya sea como trabajor o usuario
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/registroRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/registroRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/registroRequest'
+        required: true
+      responses:
+        '201':
+          description: Usuario creado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/registroResponse'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/registroResponse'
+        '400':
+          description: registroRequestición incorrecta
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        '401':
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        '404':
+          description: No encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/404Response'
+        '500':
+          description: Servidor no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/500Response'
+      security:
+        - alworki_auth:
+            - write:dummy
+            - read:dummy
+  
+  /inicio-sesion:
+    post:
+      tags:
+        - Inicio de sesión en Alworki
+      summary: Inicio de sesión
+      description: Iniciar sesión
+      operationId: inicioSesion
+      requestBody:
+        description: Iniciar sesión en Alworki ya sea como trabajor o usuario
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/inicioSesionRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/inicioSesionRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/inicioSesionRequest'
+        required: true
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inicioSesionResponse'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/inicioSesionResponse'
+        '400':
+          description: registroRequestición incorrecta
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        '401':
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        '404':
+          description: No encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/404Response'
+        '500':
+          description: Servidor no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/500Response'
+      security:
+        - alworki_auth:
+            - write:dummy
+            - read:dummy
+            
+ 
+  /servicios-busquedas:
+    post:
+      tags:
+        - Pantallas principales
+      summary: Inicio de sesión
+      description: Iniciar sesión
+      operationId: serviciosBusquedas
+      parameters:
+        - name: idSesion
+          in: header
+          description: '1234ABCD'
+          required: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: 'application/json'
+          required: false
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: 'Bearer token_de_acceso'
+          required: false
+          schema:
+            type: string
+        - name: longuitud
+          in: header
+          description: '12.29.46'
+          required: false
+          schema:
+            type: string
+        - name: latitud
+          in: header
+          description: '12.29.46'
+          required: false
+          schema:
+            type: string
+
+      requestBody:
+        description: Iniciar sesión en Alworki ya sea como trabajor o usuario
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/serviciosRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/serviciosRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/serviciosRequest'
+        required: true
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/serviciosResponse'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/serviciosResponse'
+        '400':
+          description: registroRequestición incorrecta
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        '401':
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        '404':
+          description: No encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/404Response'
+        '500':
+          description: Servidor no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/500Response'
+      security:
+        - alworki_auth:
+            - write:dummy
+            - read:dummy
+ 
+  
+  /inicio:
+    get:
+      tags:
+        - Pantallas principales
+      summary: Inicio de sesión
+      description: Iniciar sesión
+      operationId: inicio
+      parameters:
+        - name: idSesion
+          in: header
+          description: '1234ABCD'
+          required: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: 'application/json'
+          required: false
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: 'Bearer token_de_acceso'
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inicioResponse'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/inicioResponse'
+        '400':
+          description: registroRequestición incorrecta
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        '401':
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        '404':
+          description: No encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/404Response'
+        '500':
+          description: Servidor no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/500Response'
+      security:
+        - alworki_auth:
+            - write:dummy
+            - read:dummy
+  
+  /notificaciones:
+    get:
+      tags:
+        - Pantallas principales
+      summary: Inicio de sesión
+      description: Iniciar sesión
+      operationId: notificaciones
+      parameters:
+        - name: idSesion
+          in: header
+          description: '1234ABCD'
+          required: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: 'application/json'
+          required: false
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: 'Bearer token_de_acceso'
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notificacionesResponse'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/notificacionesResponse'
+        '400':
+          description: registroRequestición incorrecta
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        '401':
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        '404':
+          description: No encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/404Response'
+        '500':
+          description: Servidor no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/500Response'
+      security:
+        - alworki_auth:
+            - write:dummy
+            - read:dummy
+            
+            
+  
+  /usuario/{idUsuario}:
+    post:
+      tags:
+        - Usuarios
+      summary: Inicio de sesión
+      description: Iniciar sesión
+      operationId: usuario
+      parameters:
+        - name: idUsuario
+          in: path
+          description: 'ABCD'
+          required: true
+          schema:
+            type: string
+        - name: idSesion
+          in: header
+          description: '1234ABCD'
+          required: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: 'application/json'
+          required: false
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: 'Bearer token_de_acceso'
+          required: false
+          schema:
+            type: string
+        - name: longuitud
+          in: header
+          description: '12.29.46'
+          required: false
+          schema:
+            type: string
+        - name: latitud
+          in: header
+          description: '12.29.46'
+          required: false
+          schema:
+            type: string
+        - name: verificación
+          in: header
+          description: 'Estatus de verificación'
+          required: false
+          schema:
+            type: boolean           
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/usuarioResponse'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/usuarioResponse'
+        '400':
+          description: registroRequestición incorrecta
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        '401':
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        '404':
+          description: No encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/404Response'
+        '500':
+          description: Servidor no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/500Response'
+      security:
+        - alworki_auth:
+            - write:dummy
+            - read:dummy  
+ 
+  /usuario/comentarios:
+    get:
+      tags:
+        - Usuarios
+      summary: Inicio de sesión
+      description: Iniciar sesión
+      operationId: usuarioComentarios
+      parameters:
+        - name: idSesion
+          in: header
+          description: '1234ABCD'
+          required: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: 'application/json'
+          required: false
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: 'Bearer token_de_acceso'
+          required: false
+          schema:
+            type: string
+        - name: longuitud
+          in: header
+          description: '12.29.46'
+          required: false
+          schema:
+            type: string
+        - name: latitud
+          in: header
+          description: '12.29.46'
+          required: false
+          schema:
+            type: string
+        - name: verificación
+          in: header
+          description: 'Estatus de verificación'
+          required: false
+          schema:
+            type: boolean           
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/usuarioResponse'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/usuarioResponse'
+        '400':
+          description: registroRequestición incorrecta
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        '401':
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        '404':
+          description: No encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/404Response'
+        '500':
+          description: Servidor no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/500Response'
+      security:
+        - alworki_auth:
+            - write:dummy
+            - read:dummy  
+ 
+  /usuario/citas:
+    put:
+      tags:
+        - Usuarios
+      summary: Inicio de sesión
+      description: Iniciar sesión
+      operationId: usuarioCitas
+      parameters:
+        - name: idSesion
+          in: header
+          description: '1234ABCD'
+          required: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: 'application/json'
+          required: false
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: 'Bearer token_de_acceso'
+          required: false
+          schema:
+            type: string
+        - name: longuitud
+          in: header
+          description: '12.29.46'
+          required: false
+          schema:
+            type: string
+        - name: latitud
+          in: header
+          description: '12.29.46'
+          required: false
+          schema:
+            type: string
+        - name: verificación
+          in: header
+          description: 'Estatus de verificación'
+          required: false
+          schema:
+            type: boolean           
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/usuarioResponse'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/usuarioResponse'
+        '400':
+          description: registroRequestición incorrecta
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        '401':
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        '404':
+          description: No encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/404Response'
+        '500':
+          description: Servidor no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/500Response'
+      security:
+        - alworki_auth:
+            - write:dummy
+            - read:dummy  
+ 
+  
+  /trabajadores/comentarios:
+    put:
+      tags:
+        - Usuarios
+      summary: Inicio de sesión
+      description: Iniciar sesión
+      operationId: trabajadoresComentarios
+      parameters:
+        - name: idSesion
+          in: header
+          description: '1234ABCD'
+          required: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: 'application/json'
+          required: false
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: 'Bearer token_de_acceso'
+          required: false
+          schema:
+            type: string
+        - name: longuitud
+          in: header
+          description: '12.29.46'
+          required: false
+          schema:
+            type: string
+        - name: latitud
+          in: header
+          description: '12.29.46'
+          required: false
+          schema:
+            type: string
+        - name: verificación
+          in: header
+          description: 'Estatus de verificación'
+          required: false
+          schema:
+            type: boolean           
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/usuarioResponse'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/usuarioResponse'
+        '400':
+          description: registroRequestición incorrecta
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        '401':
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        '404':
+          description: No encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/404Response'
+        '500':
+          description: Servidor no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/500Response'
+      security:
+        - alworki_auth:
+            - write:dummy
+            - read:dummy  
+            
+  
+  /trabajadores/{idTrabajador}:
+    post:
+      tags:
+        - Usuarios
+      summary: Inicio de sesión
+      description: Iniciar sesión
+      operationId: trabajador
+      parameters:
+        - name: idTrabajador
+          in: path
+          description: 'ABCD'
+          required: true
+          schema:
+            type: string
+        - name: idSesion
+          in: header
+          description: '1234ABCD'
+          required: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: 'application/json'
+          required: false
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: 'Bearer token_de_acceso'
+          required: false
+          schema:
+            type: string
+        - name: longuitud
+          in: header
+          description: '12.29.46'
+          required: false
+          schema:
+            type: string
+        - name: latitud
+          in: header
+          description: '12.29.46'
+          required: false
+          schema:
+            type: string
+        - name: verificación
+          in: header
+          description: 'Estatus de verificación'
+          required: false
+          schema:
+            type: boolean           
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/usuarioResponse'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/usuarioResponse'
+        '400':
+          description: registroRequestición incorrecta
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        '401':
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        '404':
+          description: No encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/404Response'
+        '500':
+          description: Servidor no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/500Response'
+      security:
+        - alworki_auth:
+            - write:dummy
+            - read:dummy  
+    
+
+  /pagos:
+    post:
+      tags:
+        - Pantallas principales
+      summary: Inicio de sesión
+      description: Iniciar sesión
+      operationId: pagos
+      parameters:
+        - name: idSesion
+          in: header
+          description: '1234ABCD'
+          required: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: 'application/json'
+          required: false
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: 'Bearer token_de_acceso'
+          required: false
+          schema:
+            type: string
+        - name: longuitud
+          in: header
+          description: '12.29.46'
+          required: false
+          schema:
+            type: string
+        - name: latitud
+          in: header
+          description: '12.29.46'
+          required: false
+          schema:
+            type: string
+        - name: verificación
+          in: header
+          description: 'Estatus de verificación'
+          required: false
+          schema:
+            type: boolean           
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/usuarioResponse'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/usuarioResponse'
+        '400':
+          description: registroRequestición incorrecta
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        '401':
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        '404':
+          description: No encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/404Response'
+        '500':
+          description: Servidor no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/500Response'
+      security:
+        - alworki_auth:
+            - write:dummy
+            - read:dummy  
+      
+
+  /configuraciones:
+    post:
+      tags:
+        - Pantallas principales
+      summary: Inicio de sesión
+      description: Iniciar sesión
+      operationId: configuracion
+      parameters:
+        - name: idSesion
+          in: header
+          description: '1234ABCD'
+          required: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: 'application/json'
+          required: false
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: 'Bearer token_de_acceso'
+          required: false
+          schema:
+            type: string
+        - name: longuitud
+          in: header
+          description: '12.29.46'
+          required: false
+          schema:
+            type: string
+        - name: latitud
+          in: header
+          description: '12.29.46'
+          required: false
+          schema:
+            type: string
+        - name: verificación
+          in: header
+          description: 'Estatus de verificación'
+          required: false
+          schema:
+            type: boolean           
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/usuarioResponse'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/usuarioResponse'
+        '400':
+          description: registroRequestición incorrecta
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        '401':
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        '404':
+          description: No encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/404Response'
+        '500':
+          description: Servidor no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/500Response'
+      security:
+        - alworki_auth:
+            - write:dummy
+            - read:dummy  
+            
+  /mensajes:
+    post:
+      tags:
+        - Pantallas principales
+      summary: Inicio de sesión
+      description: Iniciar sesión
+      operationId: mensajes
+      parameters:
+        - name: idSesion
+          in: header
+          description: '1234ABCD'
+          required: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: 'application/json'
+          required: false
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: 'Bearer token_de_acceso'
+          required: false
+          schema:
+            type: string
+        - name: longuitud
+          in: header
+          description: '12.29.46'
+          required: false
+          schema:
+            type: string
+        - name: latitud
+          in: header
+          description: '12.29.46'
+          required: false
+          schema:
+            type: string
+        - name: verificación
+          in: header
+          description: 'Estatus de verificación'
+          required: false
+          schema:
+            type: boolean           
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/usuarioResponse'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/usuarioResponse'
+        '400':
+          description: registroRequestición incorrecta
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        '401':
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        '404':
+          description: No encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/404Response'
+        '500':
+          description: Servidor no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/500Response'
+      security:
+        - alworki_auth:
+            - write:dummy
+            - read:dummy              
+           
+  /servicioEntregas:
+    post:
+      tags:
+        - Pantallas principales
+      summary: Inicio de sesión
+      description: Iniciar sesión
+      operationId: servicioEntrega
+      parameters:
+        - name: idSesion
+          in: header
+          description: '1234ABCD'
+          required: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: 'application/json'
+          required: false
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: 'Bearer token_de_acceso'
+          required: false
+          schema:
+            type: string
+        - name: longuitud
+          in: header
+          description: '12.29.46'
+          required: false
+          schema:
+            type: string
+        - name: latitud
+          in: header
+          description: '12.29.46'
+          required: false
+          schema:
+            type: string
+        - name: verificación
+          in: header
+          description: 'Estatus de verificación'
+          required: false
+          schema:
+            type: boolean           
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/usuarioResponse'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/usuarioResponse'
+        '400':
+          description: registroRequestición incorrecta
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        '401':
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        '404':
+          description: No encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/404Response'
+        '500':
+          description: Servidor no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/500Response'
+      security:
+        - alworki_auth:
+            - write:dummy
+            - read:dummy     
+            
+  /identidadValidaciones:
+    post:
+      tags:
+        - Pantallas principales
+      summary: Inicio de sesión
+      description: Iniciar sesión
+      operationId: identidadValidacion
+      parameters:
+        - name: idSesion
+          in: header
+          description: '1234ABCD'
+          required: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: 'application/json'
+          required: false
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: 'Bearer token_de_acceso'
+          required: false
+          schema:
+            type: string
+        - name: longuitud
+          in: header
+          description: '12.29.46'
+          required: false
+          schema:
+            type: string
+        - name: latitud
+          in: header
+          description: '12.29.46'
+          required: false
+          schema:
+            type: string
+        - name: verificación
+          in: header
+          description: 'Estatus de verificación'
+          required: false
+          schema:
+            type: boolean           
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/usuarioResponse'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/usuarioResponse'
+        '400':
+          description: registroRequestición incorrecta
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        '401':
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        '404':
+          description: No encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/404Response'
+        '500':
+          description: Servidor no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/500Response'
+      security:
+        - alworki_auth:
+            - write:dummy
+            - read:dummy      
+            
+            
+components:
+  schemas:
+    registroRequest:
+      type: object
+      properties:
+        nombreCompleto: 
+          type: string
+          example: "Henrry Ford"
+        correoElectronico: 
+          type: string
+          example: "usuario@example.com"
+        telefono: 
+          type: string
+          example: "1234567890"
+        contrasenia: 
+          type: string
+          example: "ContraseñaSegura123!"
+        terminosCondiciones: 
+          type: boolean
+          example: true
+
+      xml:
+        name: registro
+        
+    registroResponse:
+      type: object
+      properties:
+        estatus: 
+          type: string
+          example: "Creado"
+        mensaje: 
+          type: string
+          example: "Registro completado correctamente. Por favor verifica tu correo electrónico para activar tu cuenta."
+        idSesion:
+          type: string
+          example: "ABCD1234"
+        token: 
+          type: string
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"       
+      xml:
+        name: registro          
+        
+    inicioSesionRequest:
+      type: object
+      properties:
+        usuario:
+          type: string
+          example: "usuario@example.com"
+        contrasenia: 
+          type: string
+          example: "ContraseñaSegura123!"
+      xml:
+        name: Inicio sesión 
+
+
+    inicioSesionResponse:
+      type: object
+      properties:
+        idSesion:
+          type: string
+          example: "ABCD1234"
+        token: 
+          type: string
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"           
+        estatus: 
+          type: string
+          example: "Exitoso"
+        mensaje: 
+          type: string
+          example: "Inicio de sesión exitoso."
+
+      xml:
+        name: Inicio sesión         
+      
+      
+    
+    serviciosRequest:
+      type: object
+      properties:
+        servicio:
+          type: string
+          example: "plomeria"
+        ubicacion: 
+          type: string
+          example: "Ciudad de México"
+        radioubicacion: 
+          type: integer
+          example: 10000
+        categoria: 
+          type: string
+          example: "Servicios Domésticos"          
+      xml:
+        name: Servicios
+
+
+    serviciosResponse:
+      type: array
+      items:
+        required:
+            - id
+            - nombre
+            - proveedor
+            - descripcion
+            - ubicacion
+        properties:
+          id:
+            type: integer
+            format: int64
+            example: 12345
+          nombre:
+            type: string
+            example: "Plomería General"
+          proveedor:
+            type: string
+            example: "Juan Pérez"
+          descripcion:
+            type: string
+            example: "Servicios de plomería y reparaciones generales. Más de 10 años de experiencia." 
+          precioRojo:
+            type: number
+            example: 150.5
+          precioAzul:
+            type: number
+            example: 150.5  
+          calificacion:
+            type: number
+            example: 4.5  
+          ubicacion:
+            type: string
+            example: "Ciudad de México"               
+      xml:
+        name: Servicios      
+
+
+
+    inicioResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            required:
+              - id
+              - urlImagen
+              - categoria
+            properties:
+              id:
+                type: integer
+                format: int64
+                example: 12345
+              urlImagen:
+                type: string
+                example: "image1.jpg"
+              categoria:
+                type: string
+                example: "Comida"
+        publicaciones:
+          type: array
+          items:
+            type: object
+            required:
+              - idUsuario
+              - nombreUsuario
+              - ubicacionUsuario
+              - idPublicacion
+              - contenidoPublicacion
+              - meGustaPublicacion
+              - comentariosPublicacion
+              - tiempoPublicacion
+            properties:
+              idUsuario:
+                type: integer
+                format: int64
+                example: 12345
+              nombreUsuario:
+                type: string
+                example: "Beth Williams"
+              ubicacionUsuario:
+                type: string
+                example: "Mexico"
+              idPublicacion:
+                type: integer
+                format: int64
+                example: 98754
+              contenidoPublicacion:
+                type: string
+                example: "Really love this recent photo. "
+              meGustaPublicacion:
+                type: integer
+                example: 1000
+              comentariosPublicacion:
+                type: integer
+                example: 100
+              tiempoPublicacion:
+                type: string
+                example: "2 minutos"
+      xml:
+        name: Inicio
+
+
+    notificacionesResponse:
+      type: object
+      properties:
+        estatus: 
+          type: string
+          format: int64
+          example: "Actualizado" 
+        items:
+          type: array
+          items:
+            type: object
+            required:
+              - id
+              - urlImagen
+              - categoria
+            properties:
+              id:
+                type: integer
+                format: int64
+                example: 12345
+              mensaje:
+                type: string
+                example: "Se completo tu velidación de identidad"
+              tiempo:
+                type: string
+                example: "2 horas atrás"
+      xml:
+        name: Inicio
+       
+       
+
+    usuarioResponse:
+      type: object
+      properties:
+        estatus: 
+          type: string
+          format: int64
+          example: "Exitoso" 
+        items:
+          type: array
+          items:
+            type: object
+            required:
+              - id
+              - urlImagen
+              - categoria
+            properties:
+              id:
+                type: integer
+                format: int64
+                example: 12345
+              nombre:
+                type: string
+                example: "Tina Shah"
+              oficio:
+                type: string
+                example: "Pintor, Carpintero, Escultor"
+              biografia:
+                type: string
+                example: "Especialista  en pintura de obra y escultura en madera."
+              localizacion:
+                type: string
+                example: "Madrid, España"
+              calificacion:
+                type: number
+                example: 4.5
+              actividades:
+                items:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      actividadPrincipal:
+                        type: string 
+                        example: "Retratos de personas"
+                      descripcionActividad:
+                        items:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              tamanio:
+                                type: string 
+                                example: "30x20"
+                              material:
+                                type: string 
+                                example: "Oleo"                                   
+              portafolio:
+                items:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      imagen:
+                        type: string 
+                        example: "url_to_portfolio_image1.jpg"
+                      descripcion:
+                        type: string 
+                        example: "Obra de escultura en madera."
+                        
+              reseñas:
+                items:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      reseniador:
+                        type: string 
+                        example: "Nathan"
+                      evaluacion:
+                        type: number 
+                        example: 4.8   
+                      comentarios:
+                        type: string 
+                        example: "Excelente trabajo en la mesa de madera, detalles impresionantes."       
+              disponibilidad:
+                items:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      idUsuarioAgendado:
+                        type: string 
+                        example: "ABCD1234"
+                      fecha:
+                        type: string 
+                        example: "Sábado, 05 de agosto de 2026"
+                      horarioAsignado:
+                        items:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              ocupacion1:
+                                type: string 
+                                example: "03:00:00 PM"
+                              ocupacion2:
+                                type: string 
+                                example: "05:00:00 PM"               
+                     
+      xml:
+        name: Inicio
+        
+
+
+      
+    400Response:
+      type: object
+      properties:
+        status: 
+          type: integer
+          example: 400
+        error: 
+          type: string
+          example: "registroRequestición incorrecta"
+        message:
+          type: string
+          example: "La solicitud contiene sintaxis errónea y no puede ser procesada."
+      xml:
+        name: respuesta 400     
+        
+        
+    401Response:
+      type: object
+      properties:
+        status: 
+          type: integer
+          example: 401
+        error: 
+          type: string
+          example: "No autorizado"
+        message:
+          type: string
+          example: "Autenticación requerida y ha fallado o aún no ha sido provista."
+      xml:
+        name: respuesta 401
+        
+        
+    404Response:
+      type: object
+      properties:
+        status: 
+          type: integer
+          example: 404
+        error: 
+          type: string
+          example: "No encontrado"
+        message:
+          type: string
+          example: "El recurso solicitado no fue encontrado en este servidor."
+      xml:
+        name: respuesta 404
+        
+        
+    500Response:
+      type: object
+      properties:
+        status: 
+          type: integer
+          example: 500
+        error: 
+          type: string
+          example: "Servidor no encontrado"
+        message:
+          type: string
+          example: "El servidor encontró una condición inesperada que le impidió cumplir con la solicitud."
+      xml:
+        name: respuesta 500 
+        
+
+  securitySchemes:
+    alworki_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://alworki.swagger.io/oauth/authorize
+          scopes:
+            write:dummy: Modificar usuarios en la aplicación
+            read:dummy: Leer usuarios
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header

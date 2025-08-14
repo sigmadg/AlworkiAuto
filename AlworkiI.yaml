@@ -1,0 +1,814 @@
+openapi: 3.0.3
+info:
+  title: Alworki - OpenAPI 3.0
+  description: |
+    This contract defines the information necessary for data processing at Alworki.
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+servers:
+  - url: https://alworki.com/api/v3
+tags:
+  - name: Login to Alworki
+    description: Login and registration at Alworki
+    externalDocs:
+      description: Details to be refined
+      url: http://swagger.io
+  - name: Main Screens
+    description: Main screens in Alworki
+    externalDocs:
+      description: Details to be refined
+      url: http://swagger.io      
+  - name: Users
+    description: User information
+    externalDocs:
+      description: Details to be refined
+      url: http://swagger.io          
+    
+paths:
+  /register:
+    post:
+      tags:
+        - Login to Alworki
+      summary: User registration
+      description: Add a new user
+      operationId: addUser
+      requestBody:
+        description: Create a new user in Alworki's registry either as a worker or user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/registerRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/registerRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/registerRequest'
+        required: true
+      responses:
+        '201':
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/registerResponse'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/registerResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/404Response'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/500Response'
+      security:
+        - alworki_auth:
+            - write:dummy
+            - read:dummy
+  
+  /login:
+    post:
+      tags:
+        - Login to Alworki
+      summary: Login
+      description: Log in
+      operationId: logIn
+      requestBody:
+        description: Log in to Alworki either as a worker or user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/loginRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/loginRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/loginRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/loginResponse'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/loginResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/404Response'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/500Response'
+      security:
+        - alworki_auth:
+            - write:dummy
+            - read:dummy
+  /service-search:
+    post:
+      tags:
+        - Main Screens
+      summary: Log in
+      description: Log in
+      operationId: serviceSearches
+      parameters:
+        - name: sessionId
+          in: header
+          description: '1234ABCD'
+          required: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: 'application/json'
+          required: false
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: 'Bearer access_token'
+          required: false
+          schema:
+            type: string
+        - name: longitude
+          in: header
+          description: '12.29.46'
+          required: false
+          schema:
+            type: string
+        - name: latitude
+          in: header
+          description: '12.29.46'
+          required: false
+          schema:
+            type: string
+
+      requestBody:
+        description: Log in to Alworki either as a worker or user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/serviceRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/serviceRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/serviceRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/serviceResponse'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/serviceResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/404Response'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/500Response'
+      security:
+        - alworki_auth:
+            - write:dummy
+            - read:dummy
+
+  /home:
+    get:
+      tags:
+        - Main Screens
+      summary: Log in
+      description: Log in
+      operationId: home
+      parameters:
+        - name: sessionId
+          in: header
+          description: '1234ABCD'
+          required: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: 'application/json'
+          required: false
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: 'Bearer access_token'
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/homeResponse'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/homeResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/404Response'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/500Response'
+      security:
+        - alworki_auth:
+            - write:dummy
+            - read:dummy
+
+  /notifications:
+    get:
+      tags:
+        - Main Screens
+      summary: Log in
+      description: Log in
+      operationId: notifications
+      parameters:
+        - name: sessionId
+          in: header
+          description: '1234ABCD'
+          required: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: 'application/json'
+          required: false
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: 'Bearer access_token'
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notificationsResponse'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/notificationsResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/404Response'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/500Response'
+      security:
+        - alworki_auth:
+            - write:dummy
+            - read:dummy
+  /user/{userId}:
+    post:
+      tags:
+        - Users
+      summary: Log in
+      description: Log in
+      operationId: user
+      parameters:
+        - name: userId
+          in: path
+          description: 'ABCD'
+          required: true
+          schema:
+            type: string
+        - name: sessionId
+          in: header
+          description: '1234ABCD'
+          required: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: 'application/json'
+          required: false
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: 'Bearer access_token'
+          required: false
+          schema:
+            type: string
+        - name: longitude
+          in: header
+          description: '12.29.46'
+          required: false
+          schema:
+            type: string
+        - name: latitude
+          in: header
+          description: '12.29.46'
+          required: false
+          schema:
+            type: string
+        - name: verification
+          in: header
+          description: 'Verification status'
+          required: false
+          schema:
+            type: boolean           
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/userResponse'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/userResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/404Response'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/500Response'
+      security:
+        - alworki_auth:
+            - write:dummy
+            - read:dummy
+
+  /user/comments:
+    get:
+      tags:
+        - Users
+      summary: Retrieve user comments
+      description: Fetch comments made by or for the user
+      operationId: userComments
+      parameters:
+        - name: sessionId
+          in: header
+          description: '1234ABCD'
+          required: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: 'application/json'
+          required: false
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: 'Bearer access_token'
+          required: false
+          schema:
+            type: string
+        - name: longitude
+          in: header
+          description: '12.29.46'
+          required: false
+          schema:
+            type: string
+        - name: latitude
+          in: header
+          description: '12.29.46'
+          required: false
+          schema:
+            type: string
+        - name: verification
+          in: header
+          description: 'Verification status'
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/userCommentsResponse'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/userCommentsResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/404Response'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/500Response'
+      security:
+        - alworki_auth:
+            - write:dummy
+            - read:dummy
+
+  /user/appointments:
+    put:
+      tags:
+        - Users
+      summary: Update user appointments
+      description: Modify or schedule new appointments for the user
+      operationId: userAppointments
+      parameters:
+        - name: sessionId
+          in: header
+          description: '1234ABCD'
+          required: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: 'application/json'
+          required: false
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: 'Bearer access_token'
+          required: false
+          schema:
+            type: string
+        - name: longitude
+          in: header
+          description: '12.29.46'
+          required: false
+          schema:
+            type: string
+        - name: latitude
+          in: header
+          description: '12.29.46'
+          required: false
+          schema:
+            type: string
+        - name: verification
+          in: header
+          description: 'Verification status'
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/userAppointmentsResponse'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/userAppointmentsResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/401Response'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/404Response'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/500Response'
+      security:
+        - alworki_auth:
+            - write:dummy
+            - read:dummy
+
+  /workers/{workerId}:
+    post:
+      tags:
+        - Users
+      summary: Access worker profile
+      description: Retrieve detailed information about a specific worker by their ID
+      operationId: workerProfile
+      parameters:
+        - name: workerId
+          in: path
+          description: 'ABCD'
+          required: true
+          schema:
+            type: string
+        - name: sessionId
+          in: header
+          description: '1234ABCD'
+          required: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: 'application/json'
+          required: false
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: 'Bearer access_token'
+          required: false
+          schema:
+            type: string
+        - name: longitude
+          in: header
+          description: '12.29.46'
+          required: false
+          schema:
+            type: string
+        - name: latitude
+          in: header
+          description: '12.29.46'
+          required: false
+          schema:
+            type: string
+        - name: verification
+          in: header
+          description: 'Verification status'
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/workerProfileResponse'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/workerProfileResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/400Response'
+        '401':
+          description: Unauthorized
+          content:
+            application
+
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/404Response'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/500Response'
+      security:
+        - alworki_auth:
+            - write:dummy
+            - read:dummy
